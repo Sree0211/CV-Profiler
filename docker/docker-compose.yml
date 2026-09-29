@@ -1,0 +1,42 @@
+version: "3.9"
+
+# =======================================================================
+# CV Pipeline Profiler — Docker Compose
+#
+# Usage:
+#   docker compose up demo1          # synthetic pipeline (no camera)
+#   docker compose up demo2          # mode 2 probe injection
+#   docker compose run demo1 /data/video.mp4   # with a video file
+#
+# Logs are written to ./logs/ on your host machine.
+# =======================================================================
+
+services:
+
+  # Mode 1 — pipeline engine owns execution
+  demo1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: cvprofiler:latest
+    command: ["./cvprofiler_demo1", "--synthetic"]
+    volumes:
+      - ../logs:/app/logs       # persist JSON line logs to host
+      - ../data:/data:ro        # mount video files read-only
+    environment:
+      - DISPLAY=${DISPLAY:-}    # pass through X11 for GUI if available
+    stdin_open: true
+    tty: true
+
+  # Mode 2 — probe injection demo
+  demo2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: cvprofiler:latest
+    command: ["./cvprofiler_demo2"]
+    volumes:
+      - ../logs:/app/logs
+      - ../data:/data:ro
+    stdin_open: true
+    tty: true

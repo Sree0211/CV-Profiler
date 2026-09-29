@@ -1,0 +1,45 @@
+# Build files
+build/
+cmake-build-*/
+
+# Compiled files
+*.o
+*.obj
+*.lo
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+
+# IDE
+.vscode/
+.idea/
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.py
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+CMakePresets.json
+
+# Testing
+tests/
+
+# Logs
+*.log
